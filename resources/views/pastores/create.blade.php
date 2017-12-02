@@ -14,8 +14,8 @@
 
     {!! Form::open(['route' => 'pastores.store']) !!}
       <div class="form-group">
-        {!! Form::label('nome', 'Nome:') !!}
-        {!! Form::text('nome', null, ['class'=>'form-control']) !!}
+        {!! Form::label('name', 'Nome:') !!}
+        {!! Form::text('name', null, ['class'=>'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('email', 'Email:') !!}
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group">
         {!! Form::label('password', 'Senha:') !!}
-        {!! Form::password('password', null, ['class'=>'form-control']) !!}
+        {!! Form::password('password', ['class'=>'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('anoFormatura', 'Ano da Formatura:') !!}
@@ -44,6 +44,16 @@
       <div class="form-group">
         {!! Form::label('dt_nascimento', 'Data de Nascimento:') !!}
         {!! Form::date('dt_nascimento', null, ['class'=>'form-control']) !!}
+      </div>
+      <div class="form-group">
+        {!! Form::label('com_id', 'Comunidades:') !!}
+        {!! Form::select('com_id[]',
+        \App\Comunidade::orderBy('nome')->pluck('nome', 'id')->toArray(), null,
+        ['class'=>'form-control', 'multiple']) !!}
+      </div>
+      <div class="form-group">
+        {!! Form::label('dt_instalacao', 'Data da Instalação:') !!}
+        {!! Form::date('dt_instalacao', null, ['class'=>'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::submit('Criar Pastor', ['class'=>'btn btn-primary']) !!}

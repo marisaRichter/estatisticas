@@ -17,18 +17,22 @@
         {!! Form::label('dt_evento', 'Data do Evento:') !!}
         {!! Form::date('dt_evento', null, ['class'=>'form-control']) !!}
       </div>
+
       <div class="form-group">
-        {!! Form::label('comunidade_id', 'Comunidade:') !!}
-        {!! Form::select('comunidade_id',
-        \App\Comunidade::orderBy('nome')->pluck('nome', 'id')->toArray(), null,
+        {!! Form::label('past_com_id', 'Comunidade:') !!}
+        {!! Form::select('past_com_id',
+        DB::table('pastor_comunidades')->select('pastor_comunidades.id', DB::raw('concat(users.name, "-", comunidades.nome) AS nomes'))
+
+                ->join('pastores', 'pastor_comunidades.pastor_id', '=', 'pastores.id')
+
+                ->join('users', 'pastores.user_id', '=', 'users.id')
+                ->join('comunidades', 'pastor_comunidades.comunidade_id', '=', 'comunidades.id')
+
+                ->groupby('pastor_comunidades.id')
+                ->pluck('nomes', 'pastor_comunidades.id')->toArray(), null,
         ['class'=>'form-control']) !!}
       </div>
-      <div class="form-group">
-        {!! Form::label('pastor_id', 'Pastor:') !!}
-        {!! Form::select('pastor_id',
-        \App\User::orderBy('name')->pluck('name', 'id')->toArray(), null,
-        ['class'=>'form-control']) !!}
-      </div>
+
       @foreach ($tiposDeEventos as $tpEv)
         <div class="form-group" >
           {{ Form::checkbox('tpEv[]', $tpEv->id, null, ['onClick' => "showForm($tpEv->id)"]) }}
@@ -36,7 +40,7 @@
         </div>
         <div class="form-group none" id="{{ $tpEv->id }}">
           {!! Form::label('qtd_envolvidos', "Total de envolvidos no/na $tpEv->nome:") !!}
-          {!! Form::number('qtd_envolvidos[]', null, ['class'=>'form-control']) !!}
+          {!! Form::number('qtd_envolvidos[]', 0, ['class'=>'form-control']) !!}
         </div>
       @endforeach
 

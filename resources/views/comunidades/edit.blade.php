@@ -22,7 +22,7 @@
       {!! Form::text('cidade', $comunidade->cidade, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-      {!! Form::label('localidade', 'Cidade:') !!}
+      {!! Form::label('localidade', 'Localidade:') !!}
       {!! Form::text('localidade', $comunidade->localidade, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">

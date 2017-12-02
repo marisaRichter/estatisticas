@@ -2,7 +2,8 @@
 
 @section('content')
   <div class='container'>
-    <h1>Comunidades</h1>
+    <h1 class='left'>Comunidades</h1>
+    <div class="right btn_new"><a href="{{ route('comunidades.create') }}" class="btn-sm btn-info">Nova</a></div>
     <table class='table table-striped table-bordered table-hover'>
       <thead align='center'>
         <tr>
@@ -25,7 +26,7 @@
       <tbody align='center'>
       @foreach ($comunidades as $com)
         <tr>
-          <td>{{ $com->nome}}</td>
+          <td><a href="{{ route('comunidades.view', ['id'=>$com->id]) }}" >{{ $com->nome}}</a></td>
           <td>{{ $com->localidade}}</td>
           <td>{{ $com->cidade}}</td>
           <td>{{ $com->qtd_membros}}</td>

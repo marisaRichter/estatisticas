@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class PastorComunidade extends Model
 {
     //
+    protected $fillable = [
+      'pastor_id',
+      'comunidade_id',
+      'dt_instalacao',
+    ];
+
     public function eventos() {
       return $this->hasMany('App\Evento');
     }

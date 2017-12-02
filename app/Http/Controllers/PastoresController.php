@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Pastor;
 use App\Http\Controllers\Controller;
 Use App\Http\Requests\PastorRequest;
+Use App\Http\Requests\PastorComunidadeRequest;
 use App\User;
+use App\Pastor;
+use App\PastorComunidade;
 
 class PastoresController extends Controller{
 
@@ -19,21 +21,24 @@ class PastoresController extends Controller{
   }
 
   public function store(PastorRequest $request){
-    $user = new User();
-    $pastor = new Pastor();
 
-    $user->name = $request->get('nome');
-    $user->email = $request->get('email');
-    $user->password = $request->get('password');
-    $user->save();
+    $dados = $request->all();
+    $user = User::create($dados);
 
-    $pastor->anoFormatura = $request->get('anoFormatura');
-    $pastor->estadoCivil = $request->get('estadoCivil');
-    $pastor->dt_nascimento = $request->get('dt_nascimento');
-    $pastor->qtd_filhos = $request->get('qtd_filhos');
-    $pastor->naturalidade = $request->get('naturalidade');
+    $pastor = new Pastor($dados);
     $pastor->user_id = $user->id;
-    $pastor->save();    
+    $pastor->save();
+
+    $count_comunidades = count($request->get('com_id'));
+    $array_comunidades = $request->get('com_id');
+
+    for($i = 0; $i < $count_comunidades; $i++){
+      $pastor_com = new PastorComunidade();
+      $pastor_com->pastor_id = $pastor->id;
+      $pastor_com->comunidade_id = $array_comunidades[$i];
+      $pastor_com->dt_instalacao = $request->get('dt_instalacao');
+      $pastor_com->save();
+    }
 
     return redirect()->route('pastores');
   }

@@ -2,7 +2,8 @@
 
 @section('content')
   <div class='container'>
-    <h1>Eventos</h1>
+    <h1 class='left'>Eventos</h1>
+    <div class="right btn_new"><a href="{{ route('eventos.create') }}" class="btn-sm btn-info">Novo</a></div>
     <table class='table table-striped table-bordered table-hover'>
       <thead align='center'>
         <tr>
@@ -21,7 +22,7 @@
           <td>{{ $ev->qtd_envolvidos}}</td>
           <td>{{ $ev->tiposDeEventos->nome }}</td>
           <td>{{ $ev->pastorComunidade->pastor->user->name }}</td>
-          <td>{{ $ev->pastorComunidade->comunidade->nome }}</td> 
+          <td>{{ $ev->pastorComunidade->comunidade->nome }}</td>
           <td><a href="{{ route('eventos.edit', ['id'=>$ev->id]) }}" class="btn-sm btn-success">Editar</a></td>
           <td><a href="{{ route('eventos.destroy', ['id'=>$ev->id]) }}" class="btn-sm btn-danger">Remover</a>
           </td>

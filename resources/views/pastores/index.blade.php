@@ -2,7 +2,8 @@
 
 @section('content')
   <div class='container'>
-    <h1>Pastores</h1>
+    <h1 class='left'>Pastores</h1>
+    <div class="right btn_new"><a href="{{ route('pastores.create') }}" class="btn-sm btn-info">Novo</a></div>
     <table class='table table-striped table-bordered table-hover'>
       <thead align='center'>
         <tr>

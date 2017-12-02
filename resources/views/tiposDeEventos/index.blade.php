@@ -2,7 +2,8 @@
 
 @section('content')
   <div class='container'>
-    <h1>Tipos de Eventos</h1>
+    <h1 class='left'>Tipos de Eventos</h1>
+    <div class="right btn_new"><a href="{{ route('tipos-de-eventos.create') }}" class="btn-sm btn-info">Novo</a></div>
     <table class='table table-striped table-bordered table-hover'>
       <thead align='center'>
         <tr>

@@ -22,6 +22,7 @@ Route::group(['prefix'=>'comunidades', 'where'=>['id'=>'[0-9]+']], function() {
   Route::get('{id}/destroy', ['as'=>'comunidades.destroy', 'uses'=>'ComunidadesController@destroy']);
   Route::get('{id}/edit', ['as'=>'comunidades.edit', 'uses'=>'ComunidadesController@edit']);
   Route::put('{id}/update', ['as'=>'comunidades.update', 'uses'=>'ComunidadesController@update']);
+  Route::get('{id}/view', ['as'=>'comunidades.view', 'uses'=>'ComunidadesController@view']);
 });
 
 Route::group(['prefix'=>'tipos-de-eventos', 'where'=>['id'=>'[0-9]+']], function() {
@@ -59,3 +60,6 @@ Route::group(['prefix'=>'eventos', 'where'=>['id'=>'[0-9]+']], function() {
   Route::get('{id}/edit', ['as'=>'eventos.edit', 'uses'=>'EventosController@edit']);
   Route::put('{id}/update', ['as'=>'eventos.update', 'uses'=>'EventosController@update']);
 });
+
+
+  Route::get('estatisticas', 'EstatisticasController@index');
